@@ -4,10 +4,10 @@ const dotenv = require("dotenv")
 dotenv.config({ path: "./.env" });
 
 const client = mysql.createConnection({
-    user: "LabUse",
+    user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    host: "localhost",
-    database: "blood"
+    host: process.env.DB_HOST,
+    database: process.env.DATABASE
 });
   
 const connectDb = async () => {

@@ -5,7 +5,7 @@ const {connectDb} = require("./db")
 
 const app  = express()
 
-dotenv.config({ path: ".env" });
+dotenv.config({ path: "./.env" });
 
 const port = process.env.PORT || 8000
 
@@ -18,8 +18,8 @@ app.use(cors())
 app.use(express.json())
 
 app.get("/", (req, res)=> {
-    res.send("Welcome!")
-})
+    res.send("<h1>Homepage!</h1>")
+});
 
 app.use("*", (req, res)=> res.status(404).json({error: "not found"}))
 
