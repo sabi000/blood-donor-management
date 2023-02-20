@@ -1,6 +1,6 @@
 import React from "react";
 
-function RegisterDonor() {
+function RegisterOrganization() {
   return (
     <div className="grid grid-rows-1 mt-20">
       <div className="bg-[#000300] flex justify-center mx-[20%]">
@@ -8,13 +8,10 @@ function RegisterDonor() {
           <h2 className="text-4xl text-slate-200 font-bold text-center pb-1">
             REGISTER
           </h2>
-          <h3 className="text-txt1 text-sm text-center font-semibold pb-3 uppercase">
-            {" "}
-            As a donor.
-          </h3>
+          <h3 className="text-txt1 text-sm text-center pb-3 font-semibold uppercase "> As an Organization.</h3>
 
           <div className="flex flex-col text-slate-200 pb-2">
-            <label>Donor Name</label>
+            <label>Organization Name</label>
             <input
               className="rounded-lg bg-slate-200 mt-2 p-2 text-txt2 focus:bg-gray-700 focus:outline-none focus:text-txt1"
               type="text"
@@ -27,27 +24,8 @@ function RegisterDonor() {
               type="text"
             />
           </div>
-
           <div className="flex flex-col text-slate-200 pb-2">
-            <label>Select your blood group</label>
-            <select
-              id="bloodGroup"
-              class="bg-slate-200 mt-2 p-2  text-txt2 rounded-lg  block w-full placeholder-gray-400  "
-            >
-              <option selected>Blood groups</option>
-              <option value="O+">O+</option>
-              <option value="O-">O-</option>
-              <option value="A+">A+</option>
-              <option value="A-">A-</option>
-              <option value="B+">B+</option>
-              <option value="B-">B-</option>
-              <option value="AB+">AB+</option>
-              <option value="AB-">AB-</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col text-slate-200 pb-2">
-            <label>E-mail address</label>
+            <label>PAN number </label>
             <input
               className="rounded-lg bg-slate-200 mt-2 p-2 text-txt2 focus:bg-gray-700 focus:outline-none focus:text-txt1"
               type="text"
@@ -55,7 +33,7 @@ function RegisterDonor() {
           </div>
 
           <div className="flex flex-col text-slate-200 pb-2">
-            <label>Phone number</label>
+            <label>Contact number</label>
             <input
               className="rounded-lg bg-slate-200 mt-2 p-2 text-txt2 focus:bg-gray-700 focus:outline-none focus:text-txt1"
               type="text"
@@ -77,21 +55,6 @@ function RegisterDonor() {
             />
           </div>
 
-          <div class="flex items-center mb-4">
-            <input
-              id="available"
-              type="checkbox"
-              value=""
-              class="w-4 h-4 mt-4 bg-slate-200 border-gray-300 rounded"
-            />
-            <label
-              for="available"
-              class="ml-2 mt-4  text-gray-900 dark:text-gray-300"
-            >
-              Available for donation.
-            </label>
-          </div>
-
           <button className="w-full my-3 py-2 bg-button1 shadow-lg shadow-gray-900/50 hover:shadow-gray-500/40 text-white font-semibold rounded-lg">
             REGISTER
           </button>
@@ -103,7 +66,7 @@ function RegisterDonor() {
           </div>
 
           <div className="flex gap-2 justify-center">
-            <p className=" text-slate-400">Registering as an organization? </p>
+            <p className=" text-slate-400">Registering as a donor? </p>
             <p className=" underline text-slate-400 ">
               <a href="/">Register here.</a>{" "}
             </p>
@@ -114,4 +77,4 @@ function RegisterDonor() {
   );
 }
 
-export default RegisterDonor;
+export default RegisterOrganization;

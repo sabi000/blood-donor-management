@@ -10,12 +10,12 @@ const Navbar = () => {
 
   return (
     <div className="flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-white">
-      <img className="h-[40%]" src="/src/assets/Logo.png" alt="Hematosys"  />
+      <img className="h-[40%]" src="/src/assets/Logo.png" alt="Hematosys" />
       <ul className="hidden md:flex">
-        <li className="p-4">Host blood donation program?</li>
-        <li className="p-4">Donate Blood?</li>
-        <li className="p-4">Find blood match?</li>
-        <li className="p-4">Login</li>
+        <li className="p-4"><a href="#" >Host blood donation program?</a></li>
+        <li className="p-4"><a href="#" >Donate Blood?</a></li>
+        <li className="p-4"><a href="#" >Find blood match?</a></li>
+        <li className="p-4"><a href="#" >Login</a></li>
       </ul>
       <div onClick={handleNav} className="block md:hidden">
         {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
@@ -30,12 +30,12 @@ const Navbar = () => {
       >
         <img className="h-9 mt-8 pl-4" src="/src/assets/Logo.png" alt="Hematosys"  />
         <ul className="uppercase">
-          <li className="p-4 border-b border-gray-600">
-            Host a blood donation program?
+          <li className="p-4 border-b border-gray-600"><a href="#" className="">
+            Host a blood donation program? </a>
           </li>
-          <li className="p-4 border-b border-gray-600">Donate Blood?</li>
-          <li className="p-4 border-b border-gray-600">Find blood match?</li>
-          <li className="p-4 border-b border-gray-600">Login</li>
+          <li className="p-4 border-b border-gray-600"><a href="#" className="">Donate Blood?</a></li>
+          <li className="p-4 border-b border-gray-600"><a href="#" className="">Find blood match?</a></li>
+          <li className="p-4 border-b border-gray-600"><a href="#" className="">Login</a></li>
         </ul>
       </div>
     </div>
