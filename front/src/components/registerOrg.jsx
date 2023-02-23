@@ -1,6 +1,6 @@
 import React from "react";
 
-function RegisterOrganization() {
+function RegisterOrg() {
   return (
     <div className="grid grid-rows-1 mt-20">
       <div className="bg-[#000300] flex justify-center mx-[20%]">
@@ -32,6 +32,14 @@ function RegisterOrganization() {
             />
           </div>
 
+          <div className="flex flex-col text-slate-200 pb-2">
+            <label>E-mail address</label>
+            <input
+              className="rounded-lg bg-slate-200 mt-2 p-2 text-txt2 focus:bg-gray-700 focus:outline-none focus:text-txt1"
+              type="text"
+            />
+          </div>
+          
           <div className="flex flex-col text-slate-200 pb-2">
             <label>Contact number</label>
             <input
@@ -77,4 +85,4 @@ function RegisterOrganization() {
   );
 }
 
-export default RegisterOrganization;
+export default RegisterOrg;

@@ -3,7 +3,7 @@ import DonationProgram from "./components/donorProg"
 import Login from "./components/login"
 import Navbar from "./components/Navbar"
 import RegisterDonor from "./components/registerDonor"
-import RegisterOrganization from "./components/registerOrg"
+import RegisterOrg from "./components/registerOrg"
 
 function App() {
   return (
