@@ -1,5 +1,5 @@
 const express = require("express");
-const {addEvent} = require("../controllers/event")
+const {addEvent, getEvent} = require("../controllers/event")
 const {getDonorList} = require("../controllers/donor")
 
 const router = express.Router();
@@ -8,7 +8,6 @@ const router = express.Router();
 
 router.post("/addEvent", addEvent )
 
-
 //get
 
 router.get("/", (req, res) => {
@@ -16,5 +15,6 @@ router.get("/", (req, res) => {
 });
 
 router.get("/donorList", getDonorList)
+router.get("/getEvent", getEvent)
 
 module.exports = router;

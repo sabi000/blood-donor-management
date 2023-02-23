@@ -28,4 +28,17 @@ const addEvent = async (req, res) => {
   );
 };
 
-module.exports = { addEvent };
+const getEvent = async (req, res) => {
+  const events = await client
+    .promise()
+    .query("select name, location, date, stime, etime, contact, description from events")
+    .then(([rows, fields]) => {
+      return rows;
+    })
+    .catch((e) => console.log(e));
+  console.log(events);
+
+  return res.status(200).json({data: events});
+};
+
+module.exports = { addEvent, getEvent };
