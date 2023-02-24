@@ -60,7 +60,7 @@ const deleteEvent = async (req, res) => {
     .catch((e) => console.log(e));
   console.log(exist);
 
-  if ((exist.length === 0))
+  if (exist.length === 0)
     return res.status(500).json({ error: "event not found." });
 
   const deleted = await client
@@ -75,4 +75,34 @@ const deleteEvent = async (req, res) => {
   return res.status(500).json({ error: "something went wrong." });
 };
 
-module.exports = { addEvent, getEvent, deleteEvent };
+const editEvent = async (req, res) => {
+  const { pid } = req.query;
+  console.log(pid);
+
+  const exist = await client
+    .promise()
+    .query("select pid from events where pid = ?", [pid])
+    .then(([rows, fields]) => {
+      console.log("yo yo yo");
+      return rows;
+    })
+    .catch((e) => console.log(e));
+  console.log(exist);
+
+  if (exist.length === 0)
+    return res.status(500).json({ error: "event not found." });
+
+  const events = await client
+    .promise()
+    .query("update events set ? where pid = ?", [req.body, pid])
+    .then(([rows, fields]) => {
+      return rows;
+    })
+    .catch((e) => console.log(e));
+  //console.log(events);
+  if (events.affectedRows > 0)
+    return res.status(200).json({ message: "record edited." });
+  return res.status(500).json({ error: "something went wrong." });
+};
+
+module.exports = { addEvent, getEvent, deleteEvent, editEvent };

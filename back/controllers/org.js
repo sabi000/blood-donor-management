@@ -1,25 +1,25 @@
 const { client } = require("../db/db");
 
-const getDonorList = async (req, res) => {
-  const donors = await client
+const getOrgList = async (req, res) => {
+  const orgs = await client
     .promise()
-    .query("select pid, name, address, bloodgroup, phone, available from donor")
+    .query("select pid, name, address, PAN, email, phone from org")
     .then(([rows, fields]) => {
       return rows;
     })
     .catch((e) => console.log(e));
-  console.log(donors);
+  console.log(orgs);
 
-  return res.status(200).json({data: donors});
+  return res.status(200).json({ data: orgs });
 };
 
-const deleteDonor = async (req, res) => {
+const deleteOrg = async (req, res) => {
   const { pid } = req.query;
   console.log(pid);
 
   const exist = await client
     .promise()
-    .query("select pid from donor where pid = ?", [pid])
+    .query("select pid from org where pid = ?", [pid])
     .then(([rows, fields]) => {
       //console.log("yo yo yo");
       return rows;
@@ -28,27 +28,27 @@ const deleteDonor = async (req, res) => {
   console.log(exist);
 
   if (exist.length === 0)
-    return res.status(500).json({ error: "donor not found." });
+    return res.status(500).json({ error: "organization not found." });
 
   const deleted = await client
     .promise()
-    .query("delete from donor where pid =? ", [pid])
+    .query("delete from org where pid =? ", [pid])
     .then(([rows, fields]) => {
       return true;
     })
     .catch((e) => console.log(e));
   console.log(deleted);
-  if (deleted) return res.status(200).json({ message: "donor deleted." });
+  if (deleted) return res.status(200).json({ message: "org deleted." });
   return res.status(500).json({ error: "something went wrong." });
 };
 
-const editDonor = async (req, res) => {
+const editOrg = async (req, res) => {
   const { pid } = req.query;
   console.log(pid);
 
   const exist = await client
     .promise()
-    .query("select pid from donor where pid = ?", [pid])
+    .query("select pid from org where pid = ?", [pid])
     .then(([rows, fields]) => {
       //console.log("yo yo yo");
       return rows;
@@ -57,19 +57,19 @@ const editDonor = async (req, res) => {
   console.log(exist);
 
   if (exist.length === 0)
-    return res.status(500).json({ error: "donor not found." });
+    return res.status(500).json({ error: "organization not found." });
 
   const edited = await client
     .promise()
-    .query("update donor set ? where pid = ?", [req.body, pid])
+    .query("update org set ? where pid = ?", [req.body, pid])
     .then(([rows, fields]) => {
       return rows;
     })
     .catch((e) => console.log(e));
   //console.log(events);
   if (edited.affectedRows > 0)
-    return res.status(200).json({ message: "donor info edited." });
+    return res.status(200).json({ message: "organization info edited." });
   return res.status(500).json({ error: "something went wrong." });
 };
 
-module.exports = { getDonorList, deleteDonor, editDonor};
+module.exports = { getOrgList, deleteOrg, editOrg };
