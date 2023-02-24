@@ -1,5 +1,6 @@
 const { client } = require("../db/db");
 const { tokenGenerator } = require("../utils");
+const bcrypt = require('bcrypt');
 
 const registerDonor = async (req, res) => {
   const { name, address, bloodgroup, email, phone, password, available } =
@@ -19,10 +20,12 @@ const registerDonor = async (req, res) => {
 
   if (exist.length > 0)
     return res.status(500).json({ error: "email already in use." });
+  
+  const salt = await bcrypt.genSalt(10)
 
   client.query(
     "insert into donor(name, address, bloodgroup, email, phone, password, available) values(?, ?, ?, ?, ?, ?, ?)",
-    [name, address, bloodgroup, email, phone, password, available],
+    [name, address, bloodgroup, email, phone, await bcrypt.hash(password, salt), available],
     (error, result) => {
       if (error) {
         //console.log(error)
@@ -51,9 +54,10 @@ const registerOrg = async (req, res) => {
   if (exist.length > 0)
     return res.status(500).json({ error: "email already in use." });
 
+    const salt = await bcrypt.genSalt(10)
   client.query(
     "insert into org(name, address, PAN, email, phone, password) values(?, ?, ?, ?, ?, ?)",
-    [name, address, PAN, email, phone, password],
+    [name, address, PAN, email, phone, await bcrypt.hash(password, salt)],
     (error, result) => {
       if (error)
         return res.status(500).json({ error: "something went wrong." });
@@ -98,11 +102,11 @@ const login = async (req, res) => {
       })
       .catch((e) => console.log(e));
   }
-  
-  if (password !== password2[0].password) {
+  //console.log(password)
+  if (! await bcrypt.compare(password, password2[0].password)) {
     return res.status(500).json({ error: "invalid credentials." });
   }
-  const token = tokenGenerator(email);
+  const token = tokenGenerator(role, email);
   res.cookie("token", token, { httpOnly: true });
   console.log("MESSAGE HERER:", token);
   return res.status(200).json({ message: "Login Successful." });

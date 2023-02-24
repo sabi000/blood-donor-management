@@ -13,4 +13,8 @@ const getDonorList = async (req, res) => {
   return res.status(200).json({data: donors});
 };
 
-module.exports = { getDonorList };
+const getDonorbyId = async(req, res) =>{
+    
+}
+
+module.exports = { getDonorList, getDonorbyId };

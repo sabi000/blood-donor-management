@@ -1,5 +1,6 @@
 create table if not exists donor(
     id serial primary key, 
+    pid varchar (36) default (uuid()) not null,
     name varchar(50),
     address varchar(50),
     bloodgroup varchar(3),
@@ -10,7 +11,8 @@ create table if not exists donor(
 );
 
 create table if not exists org(
-    id serial primary key, 
+    id int auto_increment primary key,
+    pid varchar (36) default (uuid()) not null, 
     name varchar(50),
     address varchar(50),
     PAN varchar(9),
@@ -21,13 +23,16 @@ create table if not exists org(
 
 create table if not exists events(
     id serial primary key,
+    pid varchar (36) default (uuid()) not null,
+    orgid int,
     name varchar(80),
     location varchar(60),
     date date,
     stime time,
     etime time,
     contact varchar(10),
-    description text
+    description text,
+    foreign key (orgid) references org(id) on delete cascade
 )
 
 

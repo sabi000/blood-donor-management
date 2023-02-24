@@ -1,20 +1,24 @@
 const express = require("express");
-const {addEvent, getEvent} = require("../controllers/event")
-const {getDonorList} = require("../controllers/donor")
+const {addEvent, getEvent, deleteEvent} = require("../controllers/event")
+const {getDonorList, getDonorbyId} = require("../controllers/donor")
+const {verifyAuth} = require("../utils")
 
 const router = express.Router();
 
-//post
-
-router.post("/addEvent", addEvent )
-
-//get
-
+//landing page
 router.get("/", (req, res) => {
     return res.send("Homepage")
 });
 
+//event
+router.post("/event", verifyAuth, addEvent )
+router.get("/event", getEvent)
+router.delete("/event", verifyAuth, deleteEvent)
+
+
+//donor
 router.get("/donorList", getDonorList)
-router.get("/getEvent", getEvent)
+
+
 
 module.exports = router;

@@ -5,9 +5,12 @@ const addEvent = async (req, res) => {
 
   const exist = await client
     .promise()
-    .query("select name from events where name = ? and location=? and date=? and stime = ?", [name, location, date, stime])
+    .query(
+      "select name from events where name = ? and location=? and date=? and stime = ?",
+      [name, location, date, stime]
+    )
     .then(([rows, fields]) => {
-        console.log("yo yo yo")
+      console.log("yo yo yo");
       return rows;
     })
     .catch((e) => console.log(e));
@@ -31,14 +34,45 @@ const addEvent = async (req, res) => {
 const getEvent = async (req, res) => {
   const events = await client
     .promise()
-    .query("select name, location, date, stime, etime, contact, description from events")
+    .query(
+      "select pid, name, location, date, stime, etime, contact, description from events"
+    )
     .then(([rows, fields]) => {
       return rows;
     })
     .catch((e) => console.log(e));
-  console.log(events);
+  //console.log(events);
 
-  return res.status(200).json({data: events});
+  return res.status(200).json({ data: events });
 };
 
-module.exports = { addEvent, getEvent };
+const deleteEvent = async (req, res) => {
+  const { pid } = req.query;
+  console.log(pid);
+
+  const exist = await client
+    .promise()
+    .query("select pid from events where pid = ?", [pid])
+    .then(([rows, fields]) => {
+      console.log("yo yo yo");
+      return rows;
+    })
+    .catch((e) => console.log(e));
+  console.log(exist);
+
+  if ((exist.length === 0))
+    return res.status(500).json({ error: "event not found." });
+
+  const deleted = await client
+    .promise()
+    .query("delete from events where pid =? ", [pid])
+    .then(([rows, fields]) => {
+      return true;
+    })
+    .catch((e) => console.log(e));
+  console.log(deleted);
+  if (deleted) return res.status(200).json({ message: "event deleted." });
+  return res.status(500).json({ error: "something went wrong." });
+};
+
+module.exports = { addEvent, getEvent, deleteEvent };
