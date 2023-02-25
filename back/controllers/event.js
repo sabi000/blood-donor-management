@@ -10,7 +10,7 @@ const addEvent = async (req, res) => {
       [name, location, date, stime]
     )
     .then(([rows, fields]) => {
-      console.log("yo yo yo");
+      //console.log("yo yo yo");
       return rows;
     })
     .catch((e) => console.log(e));
@@ -32,16 +32,23 @@ const addEvent = async (req, res) => {
 };
 
 const getEvent = async (req, res) => {
+  const { location, date } = req.body;
+
+  let loc = location ? location : "%";
+  let date1 = date ? date : "%";
+  console.log(loc, date1);
+
   const events = await client
     .promise()
     .query(
-      "select pid, name, location, date, stime, etime, contact, description from events"
+      "select pid, name, location, date_format(date,'%Y-%m-%d') as date, stime, etime, contact, description from events where location like ? and date(date) like ?",
+      [loc, date1]
     )
     .then(([rows, fields]) => {
       return rows;
     })
     .catch((e) => console.log(e));
-  //console.log(events);
+  console.log(events);
 
   return res.status(200).json({ data: events });
 };

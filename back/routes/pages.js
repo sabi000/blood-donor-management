@@ -2,7 +2,7 @@ const express = require("express");
 const {addEvent, getEvent, deleteEvent, editEvent} = require("../controllers/event")
 const {getDonorList, deleteDonor, editDonor} = require("../controllers/donor")
 const {deleteOrg, editOrg, getOrgList} = require("../controllers/org")
-const {verifyAuth} = require("../utils")
+const {verifyAuth} = require("../utils");
 
 const router = express.Router();
 

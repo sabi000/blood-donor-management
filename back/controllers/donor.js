@@ -1,16 +1,24 @@
 const { client } = require("../db/db");
 
 const getDonorList = async (req, res) => {
+  const { bloodgroup, address } = req.body;
+
+  let bg = bloodgroup ? bloodgroup : "%";
+  let add = address ? address : "%";
+
   const donors = await client
     .promise()
-    .query("select pid, name, address, bloodgroup, phone, available from donor")
+    .query(
+      "select pid, name, address, bloodgroup, phone, available from donor where bloodgroup like ? and address like ? and available = true",
+      [bg, add]
+    )
     .then(([rows, fields]) => {
       return rows;
     })
     .catch((e) => console.log(e));
   console.log(donors);
 
-  return res.status(200).json({data: donors});
+  return res.status(200).json({ data: donors });
 };
 
 const deleteDonor = async (req, res) => {
@@ -72,4 +80,4 @@ const editDonor = async (req, res) => {
   return res.status(500).json({ error: "something went wrong." });
 };
 
-module.exports = { getDonorList, deleteDonor, editDonor};
+module.exports = { getDonorList, deleteDonor, editDonor };
