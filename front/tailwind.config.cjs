@@ -17,6 +17,8 @@ module.exports = {
         txt2: "#002147",
         bg1: "#000300",
         bg2: "#0a1045",
+        bg3: "#cbd5e1",
+        bgfocus: "#4b5563"
       }
     },
   },

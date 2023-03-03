@@ -32,11 +32,11 @@ const addEvent = async (req, res) => {
 };
 
 const getEvent = async (req, res) => {
-  const { location, date } = req.body;
+  const { location, date } = req.query;
 
   let loc = location ? location : "%";
   let date1 = date ? date : "%";
-  console.log(loc, date1);
+  // console.log(loc, date1);
 
   const events = await client
     .promise()
@@ -48,7 +48,7 @@ const getEvent = async (req, res) => {
       return rows;
     })
     .catch((e) => console.log(e));
-  console.log(events);
+  // console.log(events);
 
   return res.status(200).json({ data: events });
 };

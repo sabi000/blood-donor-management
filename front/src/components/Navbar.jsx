@@ -11,16 +11,18 @@ const Navbar = () => {
 
   return (
     <div className="flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-white">
-      <img className="h-[40%]" src="/src/assets/Logo.png" alt="Hematosys" />
+      <Link to="/" className="h-20 mt-8">
+        <img className="h-[80%]" src="/src/assets/Logo.png" alt="Hematosys" />
+      </Link>
       <ul className="hidden md:flex">
         <li className="p-4">
           <Link to="/regorg">Host blood donation program?</Link>
         </li>
         <li className="p-4">
-          <Link to="/regdonor">Donate Blood?</Link>
+          <Link to="/events">Donate Blood?</Link>
         </li>
         <li className="p-4">
-          <Link to="#">Find blood match?</Link>
+          <Link to="/">Find blood match?</Link>
         </li>
         <li className="p-4">
           <Link to="/login">Login</Link>
@@ -49,12 +51,12 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="p-4 border-b border-gray-600">
-            <Link to="/regdonor" className="">
+            <Link to="/events" className="">
               Donate Blood?
             </Link>
           </li>
           <li className="p-4 border-b border-gray-600">
-            <Link to="#" className="">
+            <Link to="/" className="">
               Find blood match?
             </Link>
           </li>
