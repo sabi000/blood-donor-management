@@ -1,7 +1,7 @@
 const { client } = require("../db/db");
 
 const getDonorList = async (req, res) => {
-  const { bloodgroup, address } = req.body;
+  const { address, bloodgroup } = req.query;
 
   let bg = bloodgroup ? bloodgroup : "%";
   let add = address ? address : "%";
@@ -16,7 +16,7 @@ const getDonorList = async (req, res) => {
       return rows;
     })
     .catch((e) => console.log(e));
-  console.log(donors);
+  //console.log(donors);
 
   return res.status(200).json({ data: donors });
 };

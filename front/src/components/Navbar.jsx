@@ -10,7 +10,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-white">
+    <div className="flex justify-between items-center h-18 max-w-[1240px] mx-auto px-4 text-white">
       <Link to="/" className="h-20 mt-8">
         <img className="h-[80%]" src="/src/assets/Logo.png" alt="Hematosys" />
       </Link>
@@ -40,7 +40,7 @@ const Navbar = () => {
         }
       >
         <img
-          className="h-9 mt-8 pl-4"
+          className="h-12 mt-8 pl-4"
           src="/src/assets/Logo.png"
           alt="Hematosys"
         />

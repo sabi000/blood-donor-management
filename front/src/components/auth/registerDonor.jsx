@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function RegisterDonor() {
   return (
     <div className="grid grid-rows-1 mt-20">
-      <div className="bg-[#000300] flex justify-center mx-[20%]">
+      <div className="bg-bg1 flex justify-center mx-[20%]">
         <form className="max-w-[500px] w-full mx-auto rounded-lg bg-[#850000] p-8 px-8">
           <h2 className="text-4xl text-txt1 font-bold text-center pb-1">
             REGISTER

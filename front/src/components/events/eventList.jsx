@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { listEvent } from "../../http/event";
+import { listEvent } from "../../../http/event";
 import { BiSearch } from "react-icons/bi";
 
 function EventList() {
@@ -26,7 +26,7 @@ function EventList() {
 
   return (
     <div className="flex flex-col h-24 max-w-[1240px] mx-auto px-4 text-white">
-      <div className="flex gap-6 pb-2 justify-end">
+      <div className="flex gap-6 pb-2 justify-end mt-2">
         <input
           className="rounded-lg  mt-2 p-2 bg-bg3 text-txt2 focus:bg-bgfocus focus:outline-none focus:text-txt1"
           type="text"
@@ -47,7 +47,7 @@ function EventList() {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-4 my-8 mx-10">
+      <div className="grid grid-cols-3 gap-4 mt-6 mx-10 ">
         {events.length > 0
           ? events.map((event) => {
               return (
