@@ -57,7 +57,7 @@ function DonationProgram() {
             <label>Description of the event</label>
             <textarea
               rows="4"
-              class="block  w-full rounded-lg bg-bg3 mt-2 p-2 text-txt2 focus:bg-bgfocus focus:outline-none focus:text-txt1 "
+              className="block  w-full rounded-lg bg-bg3 mt-2 p-2 text-txt2 focus:bg-bgfocus focus:outline-none focus:text-txt1 "
               placeholder="Event description"
             />
           </div>

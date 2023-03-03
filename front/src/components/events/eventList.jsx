@@ -51,8 +51,8 @@ function EventList() {
         {events.length > 0
           ? events.map((event) => {
               return (
-                <div class="block max-w-sm p-6 bg-gray-400 border border-gray-900 rounded-lg shadow hover:bg-gray-300 ">
-                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+                <div className="block max-w-sm p-6 bg-gray-400 border border-gray-900 rounded-lg shadow hover:bg-gray-300 ">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
                     {event.name}
                   </h5>
                   <div className="flex flex-col">
@@ -60,7 +60,7 @@ function EventList() {
                     <h3 className=""> {event.date}</h3>
                     <h3 className=""> {event.stime}</h3>
                     <h3 className=""> {event.etime}</h3>
-                    <p class="font-normal text-gray-700 ">
+                    <p className="font-normal text-gray-700 ">
                       {event.description}
                     </p>
                   </div>

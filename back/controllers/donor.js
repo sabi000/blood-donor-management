@@ -2,10 +2,10 @@ const { client } = require("../db/db");
 
 const getDonorList = async (req, res) => {
   const { address, bloodgroup } = req.query;
-
+console.log("mesasge")
   let bg = bloodgroup ? bloodgroup : "%";
-  let add = address ? address : "%";
-
+  let add = address ? "%"+address+"%" : "%";
+console.log(add)
   const donors = await client
     .promise()
     .query(

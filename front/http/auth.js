@@ -1,11 +1,17 @@
 import http from "./http-common";
 
-const regsiterdonor = () => {
-  return http.post(`/auth/regsiterDonor`);
+const registerdonor = (values) => {
+  let data = JSON.parse(JSON.stringify(values))
+  delete data["password2"]
+  return http.post(`/auth/registerDonor`, data);
 };
 
 const registerorg = ()=>{
-    return http.post(`/auth/regsiterorg`);
+    return http.post(`/auth/registerOrg`);
 }
 
-export{regsiterdonor, registerorg}
+const login = ()=>{
+  return http.post(`/auth/login`);
+}
+
+export{registerdonor, registerorg, login}
