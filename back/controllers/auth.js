@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const registerDonor = async (req, res) => {
   const { name, address, bloodgroup, email, phone, password, available } =
     req.body;
-
+  
   const exist = await client
     .promise()
     .query(
@@ -68,7 +68,7 @@ const registerOrg = async (req, res) => {
 
 const login = async (req, res) => {
   const { role, email, password } = req.body;
-
+  console.log(req.body)
   const exist = await client
     .promise()
     .query(
@@ -79,7 +79,7 @@ const login = async (req, res) => {
       return rows;
     })
     .catch((e) => console.log(e));
-  console.log(exist);
+  //console.log(exist);
 
   if (exist.length < 1) {
     return res.status(500).json({ error: "invalid credentials." });
@@ -108,8 +108,13 @@ const login = async (req, res) => {
   }
   const token = tokenGenerator(role, email);
   res.cookie("token", token, { httpOnly: true });
-  console.log("MESSAGE HERER:", token);
-  return res.status(200).json({ message: "Login Successful." });
+  //console.log("MESSAGE HERER:", token);
+  return res.status(200).json({ message: "Login Successful.", role:role });
 };
 
-module.exports = { registerDonor, registerOrg, login };
+const logout = async (req, res) => {
+  res.clearCookie("token")
+  return res.status(200).json({ message: "Logout Sucessful !" })
+}
+
+module.exports = { registerDonor, registerOrg, login , logout};

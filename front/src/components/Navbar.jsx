@@ -1,12 +1,27 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { logout } from "../../http/auth";
+import { useAlert } from "react-alert";
+import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ auth, setAuth }) => {
   const [nav, setNav] = useState(false);
+  const alert = useAlert();
+  const navigate = useNavigate();
 
   const handleNav = () => {
     setNav(!nav);
+  };
+
+  const handleLogout = () => {
+    logout()
+      .then((res) => {
+        alert.show("Logged Out.");
+        setAuth({ ...auth, isauthed: false, role: "" });
+        navigate("/login");
+      })
+      .catch((e) => console.log(e));
   };
 
   return (
@@ -25,7 +40,11 @@ const Navbar = () => {
           <Link to="/">Find blood match?</Link>
         </li>
         <li className="p-4">
-          <Link to="/login">Login</Link>
+          {auth.isauthed ? (
+            <button onClick={handleLogout}>Logout</button>
+          ) : (
+            <Link to="/login">Login</Link>
+          )}
         </li>
       </ul>
       <div onClick={handleNav} className="block md:hidden">
@@ -61,9 +80,11 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="p-4 border-b border-gray-600">
-            <Link to="/login" className="">
-              Login
-            </Link>
+            {auth.isauthed ? (
+              <button onClick={handleLogout}>LOGOUT</button>
+            ) : (
+              <Link to="/login">LOGIN</Link>
+            )}
           </li>
         </ul>
       </div>

@@ -10,8 +10,13 @@ const registerorg = ()=>{
     return http.post(`/auth/registerOrg`);
 }
 
-const login = ()=>{
-  return http.post(`/auth/login`);
+const login = (values)=>{
+  return http.post(`/auth/login`, values);
 }
 
-export{registerdonor, registerorg, login}
+const logout = ()=>{
+  return http.delete(`/auth/logout`);
+}
+
+
+export{registerdonor, registerorg, login, logout}
