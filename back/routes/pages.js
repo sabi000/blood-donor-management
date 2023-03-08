@@ -1,6 +1,6 @@
 const express = require("express");
 const {addEvent, getEvent, deleteEvent, editEvent} = require("../controllers/event")
-const {getDonorList, deleteDonor, editDonor} = require("../controllers/donor")
+const {getDonorList, deleteDonor, editDonor, getDonorProfile} = require("../controllers/donor")
 const {deleteOrg, editOrg, getOrgList} = require("../controllers/org")
 const {verifyAuth} = require("../utils");
 
@@ -22,6 +22,7 @@ router.put("/event", verifyAuth, editEvent)
 router.get("/donor", getDonorList)
 router.delete("/donor", verifyAuth, deleteDonor)
 router.put("/donor", verifyAuth, editDonor)
+router.get("/donorprofile", verifyAuth, getDonorProfile)
 
 //org
 router.get("/org", getOrgList)

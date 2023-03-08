@@ -37,6 +37,7 @@ const registerDonor = async (req, res) => {
 
 const registerOrg = async (req, res) => {
   const { name, address, PAN, email, phone, password } = req.body;
+  console.log("body",req.body)
 
   const exist = await client
     .promise()
@@ -45,7 +46,7 @@ const registerOrg = async (req, res) => {
       [email, email]
     )
     .then(([rows, fields]) => {
-      console.log("Hello");
+      console.log("Existing email");
       return rows;
     })
     .catch((e) => console.log(e));
@@ -55,9 +56,11 @@ const registerOrg = async (req, res) => {
     return res.status(500).json({ error: "email already in use." });
 
     const salt = await bcrypt.genSalt(10)
+  
+    console.log("salt here", password)
   client.query(
     "insert into org(name, address, PAN, email, phone, password) values(?, ?, ?, ?, ?, ?)",
-    [name, address, PAN, email, phone, await bcrypt.hash(password, salt)],
+    [name, address, PAN, email, phone,  await bcrypt.hash(password, salt)],
     (error, result) => {
       if (error)
         return res.status(500).json({ error: "something went wrong." });

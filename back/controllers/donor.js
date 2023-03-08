@@ -21,6 +21,27 @@ console.log(add)
   return res.status(200).json({ data: donors });
 };
 
+const getDonorProfile = async (req, res) => {
+  // console.log("kei message ni lekhdeu",req.email)
+  const { email } = req.id;
+  const donor = await client
+    .promise()
+    .query(
+      "select pid, name, address, bloodgroup, email, phone, available from donor where email = ?",
+      [email]
+    )
+    .then(([rows, fields]) => {
+      return rows[0];
+    })
+.catch((e) => {
+console.log(e);
+  return {"error":"Donor not found"}})
+  //console.log(donors);
+
+  return res.status(200).json({ data: donor });
+};
+
+
 const deleteDonor = async (req, res) => {
   const { pid } = req.query;
   console.log(pid);
@@ -80,4 +101,4 @@ const editDonor = async (req, res) => {
   return res.status(500).json({ error: "something went wrong." });
 };
 
-module.exports = { getDonorList, deleteDonor, editDonor };
+module.exports = { getDonorList, deleteDonor, editDonor, getDonorProfile };

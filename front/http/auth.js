@@ -6,8 +6,11 @@ const registerdonor = (values) => {
   return http.post(`/auth/registerDonor`, data);
 };
 
-const registerorg = ()=>{
-    return http.post(`/auth/registerOrg`);
+const registerorg = (values)=>{
+  let data = JSON.parse(JSON.stringify(values))
+  delete data["password2"]
+  console.log(data)
+    return http.post(`/auth/registerOrg`, data);
 }
 
 const login = (values)=>{

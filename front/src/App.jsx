@@ -12,7 +12,11 @@ import EventList from "./components/events/eventList";
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 
-const initialState = { isauthed: false, role: false, loading: false };
+const initialState = {
+  isauthed: false,
+  role: false,
+  loading: false,
+};
 
 function App() {
   const [auth, setAuth] = useState(initialState);
