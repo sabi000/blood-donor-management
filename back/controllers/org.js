@@ -13,6 +13,26 @@ const getOrgList = async (req, res) => {
   return res.status(200).json({ data: orgs });
 };
 
+const getOrgProfile = async (req, res) => {
+  const { email } = req.id;
+  const donor = await client
+    .promise()
+    .query(
+      "select pid, name, address, PAN, email, phone from org where email = ?",
+      [email]
+    )
+    .then(([rows, fields]) => {
+      return rows[0];
+    })
+    .catch((e) => {
+      console.log(e);
+      return { error: "Org not found" };
+    });
+  //console.log(donors);
+
+  return res.status(200).json({ data: donor });
+};
+
 const deleteOrg = async (req, res) => {
   const { pid } = req.query;
   console.log(pid);
@@ -43,12 +63,11 @@ const deleteOrg = async (req, res) => {
 };
 
 const editOrg = async (req, res) => {
-  const { pid } = req.query;
-  console.log(pid);
+  const { email } = req.id
 
   const exist = await client
     .promise()
-    .query("select pid from org where pid = ?", [pid])
+    .query("select pid from org where email = ?", [email])
     .then(([rows, fields]) => {
       //console.log("yo yo yo");
       return rows;
@@ -61,7 +80,7 @@ const editOrg = async (req, res) => {
 
   const edited = await client
     .promise()
-    .query("update org set ? where pid = ?", [req.body, pid])
+    .query("update org set ? where email = ?", [req.body, email])
     .then(([rows, fields]) => {
       return rows;
     })
@@ -72,4 +91,4 @@ const editOrg = async (req, res) => {
   return res.status(500).json({ error: "something went wrong." });
 };
 
-module.exports = { getOrgList, deleteOrg, editOrg };
+module.exports = { getOrgList, deleteOrg, editOrg, getOrgProfile };

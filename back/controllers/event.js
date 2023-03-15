@@ -2,6 +2,7 @@ const { client } = require("../db/db");
 
 const addEvent = async (req, res) => {
   const { name, location, date, stime, etime, contact, description } = req.body;
+  const {email} = req.id;
 
   const exist = await client
     .promise()
@@ -20,8 +21,8 @@ const addEvent = async (req, res) => {
     return res.status(500).json({ error: "event already registered." });
 
   client.query(
-    "insert into events(name, location, date, stime, etime, contact, description) values(?, ?, ?, ?, ?, ?, ?)",
-    [name, location, date, stime, etime, contact, description],
+    "insert into events(name, location, date, stime, etime, contact, description, orgid) values(?, ?, ?, ?, ?, ?, ?, (select id from org where email = ?))",
+    [name, location, date, stime, etime, contact, description, email],
     (error, result) => {
       if (error) {
         //console.log(error)
@@ -30,6 +31,28 @@ const addEvent = async (req, res) => {
     }
   );
 };
+
+
+const getEventProfile = async (req, res) => {
+	const { pid } = req.query;
+  const {email} = req.id;
+	const event = await client
+		.promise()
+		.query(
+			"select pid, name, location, date_format(date,'%Y-%m-%d') as date, stime, etime, contact, description from events where pid = ? and orgid= (select id from org where email = ?)",
+			[pid, email]
+		)
+		.then(([rows, fields]) => {
+			return rows[0]
+		})
+		.catch(e => {
+			console.log(e)
+			return { "error": "Event not found" }
+		})
+	//console.log(events);
+
+	return res.status(200).json({ data: event })
+}
 
 const getEvent = async (req, res) => {
   const { location, date } = req.query;
@@ -43,6 +66,24 @@ const getEvent = async (req, res) => {
     .query(
       "select pid, name, location, date_format(date,'%Y-%m-%d') as date, stime, etime, contact, description from events where location like ? and date(date) like ?",
       [loc, date1]
+    )
+    .then(([rows, fields]) => {
+      return rows;
+    })
+    .catch((e) => console.log(e));
+  // console.log(events);
+
+  return res.status(200).json({ data: events });
+};
+
+const getOrgEvent = async (req, res) => {
+  const { email } = req.id;
+
+  const events = await client
+    .promise()
+    .query(
+      "select pid, name, location, date_format(date,'%Y-%m-%d') as date, stime, etime, contact, description from events where orgid=(select id from org where email = ?)",
+      [email]
     )
     .then(([rows, fields]) => {
       return rows;
@@ -112,4 +153,4 @@ const editEvent = async (req, res) => {
   return res.status(500).json({ error: "something went wrong." });
 };
 
-module.exports = { addEvent, getEvent, deleteEvent, editEvent };
+module.exports = { addEvent, getEvent, deleteEvent, editEvent, getEventProfile , getOrgEvent};

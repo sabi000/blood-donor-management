@@ -9,9 +9,11 @@ import EditDonor from "./components/donors/editDonor";
 import EditOrg from "./components/org/editorg";
 import DonorList from "./components/donors/donorList";
 import EventList from "./components/events/eventList";
+import EditEvent from "./components/events/editEvent";
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import { verifyLogin } from "../http/auth";
+import OrgEventList from "./components/org/orgEventList";
 const initialState = {
   isauthed: false,
   role: false,
@@ -66,7 +68,9 @@ function App() {
           <Route path="/regorg" element={<RegisterOrg />} />
           <Route path="/addevent" element={<DonationProgram auth={auth} />} />
           <Route path="/editdonor" element={<EditDonor auth={auth} />} />
-          <Route path="/editorg" element={<EditOrg />} />
+          <Route path="/editorg" element={<EditOrg auth={auth} />} />
+          <Route path="/editevent/:pid" element={<EditEvent auth={auth} />} />
+          <Route path="/orgevent" element={<OrgEventList auth={auth} />} />
         </Routes>
       </Router>
     </AlertProvider>

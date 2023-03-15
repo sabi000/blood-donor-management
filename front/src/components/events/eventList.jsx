@@ -38,7 +38,7 @@ function EventList() {
         <input
           className="rounded-lg bg-bg3 mt-2 p-2 text-txt2 focus:bg-bgfocus focus:outline-none focus:text-txt1"
           type="date"
-          name="date "
+          name="date"
           onChange={handleChange}
         />
 
@@ -51,7 +51,7 @@ function EventList() {
         {events.length > 0
           ? events.map((event) => {
               return (
-                <div className="block max-w-sm p-6 bg-gray-400 border border-gray-900 rounded-lg shadow hover:bg-gray-300 ">
+                <div className="block max-w-sm p-6 bg-gray-500 border border-gray-700 rounded-lg shadow hover:bg-gray-400 ">
                   <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
                     {event.name}
                   </h5>

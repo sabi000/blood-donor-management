@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { useAlert } from "react-alert";
 import { addEvent } from "../../../http/event";
 

@@ -7,5 +7,17 @@ const listEvent = (date = "", location = "") => {
 const addEvent = values => {
 	return http.post(`/event`, values)
 }
+const getEventProfile = (pid) => {
+	
+	return http.get(`eventprofile?pid=${pid}`)
+}
 
-export{listEvent, addEvent}
+const updateEvent = (values, pid) => {
+	return http.put(`event?pid=${pid}`, values)
+}
+
+const listOrgEvent = ()=>{
+	return http.get(`getorgevent`)
+}
+
+export{listEvent, addEvent, getEventProfile, updateEvent, listOrgEvent}
