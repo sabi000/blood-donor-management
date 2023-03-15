@@ -4,4 +4,8 @@ const listEvent = (date = "", location = "") => {
   return http.get(`/event/?date=${date}&location=${location}`);
 };
 
-export{listEvent}
+const addEvent = values => {
+	return http.post(`/event`, values)
+}
+
+export{listEvent, addEvent}
