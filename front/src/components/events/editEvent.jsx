@@ -45,7 +45,7 @@ const EditEvent = ({ auth }) => {
       alert.show("MISSING FIELD!");
       return;
     }
-    updateEvent(values)
+    updateEvent(values, pid)
       .then((res) => {
         alert.show("EVENT UPDATED!");
       })

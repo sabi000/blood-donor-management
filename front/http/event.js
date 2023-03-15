@@ -20,4 +20,8 @@ const listOrgEvent = ()=>{
 	return http.get(`getorgevent`)
 }
 
-export{listEvent, addEvent, getEventProfile, updateEvent, listOrgEvent}
+const deleteEvent = (pid)=>{
+	return http.delete(`event?pid=${pid}`)
+}
+
+export{listEvent, addEvent, getEventProfile, updateEvent, listOrgEvent, deleteEvent}

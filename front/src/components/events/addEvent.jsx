@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { addEvent } from "../../../http/event";
+import { CgDanger } from "react-icons/cg";
 
 const initialState = {
   name: "",
@@ -63,8 +64,11 @@ function DonationProgram({ auth }) {
 
   if (!auth.loading && auth.role !== "org") {
     return (
-      <div>
-        <h1>ACCESS DENIED.</h1>
+      <div className=" flex text-3xl w-1/4 mx-auto mt-32 my-auto gap-4">
+        <CgDanger className="text-red1 text-5xl" />
+        <h1 className="text-center text-red1 font-bold text-3xl">
+          ACCESS DENIED.
+        </h1>
       </div>
     );
   }

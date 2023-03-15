@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
-import { listOrgEvent } from "../../../http/event";
+import { deleteEvent, listOrgEvent } from "../../../http/event";
 import { BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { useAlert } from "react-alert";
 
 function OrgEventList() {
+  const alert = useAlert();
   const [events, setEvent] = useState([]);
 
   const geteventList = () => {
@@ -18,6 +20,21 @@ function OrgEventList() {
   useEffect(() => {
     geteventList();
   }, []);
+
+  const handleDelete = (pid) => {
+    console.log(pid);
+    deleteEvent(pid)
+      .then((res) => {
+        alert.show("EVENT DELETED!");
+        geteventList();
+      })
+      .catch((e) => {
+        console.log(e);
+        alert.show(
+          e?.response?.data?.error ? e.response.data.error : "FAILED TO DELETE."
+        );
+      });
+  };
 
   return (
     <div className="flex flex-col h-24 max-w-[1240px] mx-auto px-4 text-white">
@@ -43,7 +60,7 @@ function OrgEventList() {
                       <Link to={`/editevent/${event.pid}`}>
                         <BiEdit />
                       </Link>
-                      <MdDelete />
+                      <MdDelete onClick={(e) => handleDelete(event.pid)} />
                     </div>
                   </div>
                 </div>
